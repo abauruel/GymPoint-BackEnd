@@ -9,6 +9,6 @@ const route = new Router();
 route.post('/session', SessionController.store);
 route.use(Middleware);
 route.post('/student', StudentController.store);
-route.put('/student', StudentController.update);
+route.put('/student/:id', StudentController.update);
 
 export default route;
