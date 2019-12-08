@@ -44,8 +44,6 @@ class StudentController {
       weight,
       height,
     });
-
-    return res.json({ ok: true });
   }
 }
 export default new StudentController();
