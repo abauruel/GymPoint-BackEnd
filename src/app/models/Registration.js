@@ -23,4 +23,4 @@ class Registration extends Model {
   }
 }
 
-export default new Registration();
+export default Registration;
