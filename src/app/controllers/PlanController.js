@@ -42,8 +42,9 @@ class PlanController {
   }
 
   async delete(req, res) {
-    await Plan.findByPk(req.params.id);
-    return res.status(200);
+    const plan = await Plan.findByPk(req.params.id);
+    await plan.destroy();
+    return res.status(200).send();
   }
 }
 
