@@ -4,6 +4,9 @@ import Registration from '../models/Registration';
 import Plan from '../models/Plan';
 import Student from '../models/Student';
 
+import RegistrationMailJob from '../jobs/RegistrationMail';
+import Queue from '../../lib/Queue';
+
 class RegistrationController {
   async index(req, res) {
     const registrations = await Registration.findAll({
@@ -34,6 +37,12 @@ class RegistrationController {
     }
     const { dateStart, student_id, plan_id } = req.body;
 
+    /** Check student is exist */
+    const student = await Student.findByPk(student_id);
+    if (!student) {
+      return res.status(400).json({ error: 'Student invalid' });
+    }
+
     /**  check student is registred */
     const checkIsRegistred = await Registration.findOne({
       where: { student_id },
@@ -59,6 +68,9 @@ class RegistrationController {
       end_date: dateEnd,
       price: plan.price * plan.duration,
     });
+
+    await Queue.add(RegistrationMailJob.key, { registration, student, plan });
+
     return res.json(registration);
   }
 
