@@ -19,6 +19,7 @@ route.post('/students/:id/help-orders', HelpOrderController.store);
 route.get('/students/:id/help-orders', HelpOrderController.show);
 
 route.use(Middleware);
+route.get('/students', StudentController.index);
 route.post('/student', StudentController.store);
 route.put('/student/:id', StudentController.update);
 route.get('/plans', PlanController.index);
