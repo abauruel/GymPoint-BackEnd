@@ -36,6 +36,23 @@ class StudentController {
     return res.json(student);
   }
 
+  async show(req, res) {
+    const student = await Student.findByPk(req.params.id);
+
+    if (!student) {
+      return res.status(400).json({ error: 'Student is not found' });
+    }
+    const { id, name, email, age, weight, height } = student;
+    return res.json({
+      id,
+      name,
+      email,
+      age,
+      weight,
+      height,
+    });
+  }
+
   async update(req, res) {
     const schema = Yup.object().shape({
       name: Yup.string(),
@@ -61,6 +78,17 @@ class StudentController {
       weight,
       height,
     });
+  }
+
+  async delete(req, res) {
+    const student = await Student.findByPk(req.params.id);
+
+    if (!student) {
+      return res.status(400).json({ error: 'Student is not found' });
+    }
+    student.destroy();
+
+    return res.status(200).send();
   }
 }
 export default new StudentController();
