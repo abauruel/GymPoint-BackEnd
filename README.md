@@ -21,4 +21,14 @@
     <img alt="Stargazers" src="https://img.shields.io/github/stars/abauruel/GymPoint-BackEnd?style=social">
   </a>
 </p>
+### Introduction
+Project of management the Gym, using backend in NodeJS
 
+### Dependences
+* express
+* nodemailer
+* Postgres
+* sequelize
+* yup
+* bee-que
+* bcryptjs
